@@ -25,9 +25,9 @@ class DomainName(str):
     def __getattr__(self, item):
         return DomainName(item + '.' + self)
 
-
-D = DomainName('dnsseed1.chaincoin.org')
+DOMAN_NAME = 'dnsseed1.chaincoin.org'
 IP = '52.89.51.214'
+D = DomainName(DOMAN_NAME)
 TTL = 60 * 5
 
 soa_record = SOA(
@@ -54,6 +54,7 @@ mn_rand_ips = MNRandIPs()
 mn_rand_ips.refresh_mn_ips()
 ips_per_req = 8
 
+_NS_RECORD = "NS"
 def dns_response(data):
     request = DNSRecord.parse(data)
 
@@ -66,9 +67,13 @@ def dns_response(data):
     qtype = request.q.qtype
     qt = QTYPE[qtype]
 
-    reply.add_auth(*RR.fromZone("dnsseed1.chaincoin.org 3600 NS ns1.chaincoin.org"))
-    for ip in mn_rand_ips.get_random_x_ips( ips_per_req ):
-        reply.add_answer(*RR.fromZone("dnsseed1.chaincoin.org A " + ip))
+    if qt == "NS":
+        reply.add_answer(*RR.fromZone(DOMAN_NAME + " 3600 NS ns1.chaincoin.org"))
+        reply.add_ar(*RR.fromZone("ns1.chaincoin.org A " + IP))
+    else:
+        domain_name_a = DOMAN_NAME + " A "
+        for ip in mn_rand_ips.get_random_x_ips( ips_per_req ):
+            reply.add_answer(*RR.fromZone(domain_name_a + ip))
 
     logging.info("---- Reply: %s\n", str(reply) )
 
