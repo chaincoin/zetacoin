@@ -67,10 +67,10 @@ def dns_response(data):
     qt = QTYPE[qtype]
 
     reply.add_auth(*RR.fromZone("dnsseed1.chaincoin.org 3600 NS ns1.chaincoin.org"))
-    for ip in MNRandIPs.get_random_x_ips( ips_per_req ):
+    for ip in mn_rand_ips.get_random_x_ips( ips_per_req ):
         reply.add_answer(*RR.fromZone("dnsseed1.chaincoin.org A " + ip))
 
-    logging.info("---- Reply:\n", reply)
+    logging.info("---- Reply: %s\n", str(reply) )
 
     return reply.pack()
 
@@ -89,10 +89,11 @@ class BaseRequestHandler(SocketServer.BaseRequestHandler):
                                                self.client_address[1]))
         try:
             data = self.get_data()
-            logging.info(len(data), data)  # repr(data).replace('\\x', '')[1:-1]
+            logging.info(str(len(data)) + " : " + str(data) )  # repr(data).replace('\\x', '')[1:-1]
             self.send_data(dns_response(data))
-        except Exception :
-            logging.error("Error handling reques")
+        except Exception as e:
+            logging.error("Error handling reques" + str(e) )
+            logging.error(str(traceback.print_exc()))
 
 
 class TCPRequestHandler(BaseRequestHandler):

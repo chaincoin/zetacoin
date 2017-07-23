@@ -5,7 +5,7 @@ class MNRandIPs:
     def __init__(self):
         self._mn_ips = []
         self._get_count = 0
-        self._RESET_AT_COUNT = 10
+        self._RESET_AT_COUNT = 20
         self._len = 0
         pass
 
@@ -17,7 +17,7 @@ class MNRandIPs:
         result = result.replace(' : "ENABLED"', '')
         result = result.replace('"', '')
         result = result.replace('{', '').replace('}', '')
-        self._mn_ips = result.split(',')
+        self._mn_ips = [ ip.split(':')[0] for ip in result.split(',') ]
         shuffle( self._mn_ips )
         self._len = len( self._mn_ips )
 
