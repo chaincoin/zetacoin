@@ -24,6 +24,7 @@
 #include "sph_echo.h"
 
 #include <vector>
+#include "prevector.h"
 
 #include <openssl/ripemd.h>
 #include <openssl/sha.h>
@@ -173,6 +174,13 @@ inline uint160 Hash160(const T1 pbegin, const T1 pend)
 }
 
 inline uint160 Hash160(const std::vector<unsigned char>& vch)
+{
+    return Hash160(vch.begin(), vch.end());
+}
+
+/** Compute the 160-bit hash of a vector. */
+template<unsigned int N>
+inline uint160 Hash160(const prevector<N, unsigned char>& vch)
 {
     return Hash160(vch.begin(), vch.end());
 }
