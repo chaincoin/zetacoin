@@ -6,6 +6,7 @@
 #ifndef H_BITCOIN_SCRIPT
 #define H_BITCOIN_SCRIPT
 
+#include "common.h"
 #include "prevector.h"
 #include "key.h"
 #include "util.h"
