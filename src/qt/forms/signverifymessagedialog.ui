@@ -30,7 +30,7 @@
        <item>
         <widget class="QLabel" name="infoLabel_SM">
          <property name="text">
-          <string>You can sign messages/agreements with your addresses to prove you can receive Dash sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</string>
+          <string>You can sign messages/agreements with your addresses to prove you can receive Chaincoin sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</string>
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -48,7 +48,7 @@
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_SM">
            <property name="toolTip">
-            <string>The Dash address to sign the message with</string>
+            <string>The Chaincoin address to sign the message with</string>
            </property>
           </widget>
          </item>
@@ -59,6 +59,10 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../chaincoin.qrc">
+             <normaloff>:/icons/green/address-book2</normaloff>:/icons/green/address-book2</iconset>
            </property>
            <property name="shortcut">
             <string>Alt+A</string>
@@ -140,10 +144,14 @@
          <item>
           <widget class="QPushButton" name="signMessageButton_SM">
            <property name="toolTip">
-            <string>Sign the message to prove you own this Dash address</string>
+            <string>Sign the message to prove you own this Chaincoin address</string>
            </property>
            <property name="text">
             <string>Sign &amp;Message</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../chaincoin.qrc">
+             <normaloff>:/icons/green/sign</normaloff>:/icons/green/sign</iconset>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
@@ -238,7 +246,7 @@
          <item>
           <widget class="QValidatedLineEdit" name="addressIn_VM">
            <property name="toolTip">
-            <string>The Dash address the message was signed with</string>
+            <string>The Chaincoin address the message was signed with</string>
            </property>
           </widget>
          </item>
@@ -249,6 +257,9 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="icon">
+            <iconset theme="address-book2"/>
            </property>
            <property name="shortcut">
             <string>Alt+A</string>
@@ -271,10 +282,14 @@
          <item>
           <widget class="QPushButton" name="verifyMessageButton_VM">
            <property name="toolTip">
-            <string>Verify the message to ensure it was signed with the specified Dash address</string>
+            <string>Verify the message to ensure it was signed with the specified Chaincoin address</string>
            </property>
            <property name="text">
             <string>Verify &amp;Message</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../chaincoin.qrc">
+             <normaloff>:/icons/green/verify</normaloff>:/icons/green/verify</iconset>
            </property>
            <property name="autoDefault">
             <bool>false</bool>
